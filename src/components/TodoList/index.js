@@ -1,15 +1,17 @@
 import React from 'react';
+import Exercise from '../Exercise';
+import Quote from '../Quote';
 
 let todoList = [
   {
     id:1,
     completed:true,
-    description: "Complete a demo of React and Github Pages",
+    description: "Complete a TODO list application",
   },
   {
     id:2,
-    completed:true,
-    description: "Demo a TODO list application",
+    completed:false,
+    description: "Workout of the Day",
   },
 ]
 
@@ -62,19 +64,27 @@ export default class TodoList extends React.Component{
     ))
   return(
     <>
-      <h1>What to do Today</h1>
+      <h1>Things to do</h1>
+    <div class="page">
       <label>
+        <p>Filter completed items?</p>
         <input ref={this.state.filterRef} type="checkbox"
           onChange={() => this.setState((prev) => ({filtered: !prev.filtered}))}
           defaultChecked={false}></input>
-        Filter completed items
       </label>
-          <hr></hr>
+          
       <div style={{padding:"5px"}}>
         {todoList}
       </div>
-      <input onKeyPress={(event) => this.handleKeyPress(event)} ref={this.state.inputRef}></input>
+      <input onKeyPress={(event) => this.handleKeyPress(event)} ref={this.state.inputRef} type="text" placeholder="TODO..."></input>
       <button onClick={() => this.addTodoItem()}>Add TODO item</button>
+        <hr></hr>
+      <h3>Quote of the day:</h3>
+          <Quote/><br/>
+        <hr></hr>
+      <h3>Workout of the day:</h3>
+        <Exercise />
+    </div>
     </>
   )
   }
